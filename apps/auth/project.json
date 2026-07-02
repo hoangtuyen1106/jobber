@@ -6,21 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "webpack-cli build",
-        "env": {
-          "NODE_ENV": "production"
-        },
-        "cwd": "apps/auth"
-      },
-      "configurations": {
-        "development": {
-          "env": {
-            "NODE_ENV": "development"
-          }
-        }
-      }
+      "dependsOn": ["generate-types"]
     },
     "prune-lockfile": {
       "dependsOn": [
@@ -79,6 +65,18 @@
     "test": {
       "options": {
         "passWithNoTests": true
+      }
+    },
+    "generate-types": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "apps/auth"
+      }
+    },
+    "migrate-prisma": {
+      "command": "prisma migrate dev",
+      "options": {
+        "cwd": "apps/auth"
       }
     }
   }
