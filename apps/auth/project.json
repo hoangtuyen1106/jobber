@@ -70,13 +70,15 @@
     "generate-types": {
       "command": "prisma generate",
       "options": {
-        "cwd": "apps/auth"
-      }
+        "cwd": "{projectRoot}",
+        "input": ["prisma/schema.prisma"]
+      },
+      "cache": true
     },
     "migrate-prisma": {
       "command": "prisma migrate dev",
       "options": {
-        "cwd": "apps/auth"
+        "cwd": "{projectRoot}"
       }
     }
   }
