@@ -3,10 +3,7 @@
   "defaultBase": "master",
   "analytics": false,
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -42,9 +39,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": [
-        "apps/auth-e2e/**/*"
-      ]
+      "exclude": ["apps/auth-e2e/**/*"]
     }
   ]
 }
