@@ -29,6 +29,6 @@ jobs:
       # Truyền trực tiếp env và ép chế độ CI để tránh các interactive prompt bị treo
       - name: Run Nx Affected Tasks
         env:
-          AUTH_DATABASE_URL: ${{ secrets.AUTH_DATABASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           CI: true
         run: npx nx affected --targets=lint,test,build --parallel=false
