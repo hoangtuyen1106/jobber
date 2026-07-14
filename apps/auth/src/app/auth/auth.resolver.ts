@@ -12,6 +12,6 @@ export class AuthResolver {
     @Args('loginInput') loginInput: LoginInput,
     @Context() context: GqlContext,
   ) {
-    return this.authService.login(loginInput, context);
+    return this.authService.login(loginInput, context.res);
   }
 }
