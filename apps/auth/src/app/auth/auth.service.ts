@@ -4,7 +4,7 @@ import { Response } from 'express';
 import { UsersService } from '../users/users.service';
 import { compare } from 'bcryptjs';
 import { ConfigService } from '@nestjs/config';
-import { TokenPayload } from './dto/token-payload.interface';
+import { TokenPayload } from './token-payload.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class AuthService {
     const accessToken = this.jwtService.sign(tokenPayload);
     response.cookie('Authentication', accessToken, {
       httpOnly: true,
-      secure: this.configService.get('NODE_ENV') === 'production',
+      secure: !!this.configService.get('SECURE_COOKIE'),
       expires,
     });
     return user;
