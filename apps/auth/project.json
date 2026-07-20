@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "dependsOn": ["generate-types"]
+      "dependsOn": ["generate-types", "^build"]
     },
     "prune-lockfile": {
       "dependsOn": ["build"],
@@ -34,7 +34,6 @@
       "executor": "nx:noop"
     },
     "serve": {
-      "continuous": true,
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
