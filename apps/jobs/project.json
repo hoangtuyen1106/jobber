@@ -50,7 +50,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      // "dependsOn": ["build"],
       "options": {
         "buildTarget": "jobs:build",
         "runBuildTargetDependencies": false
