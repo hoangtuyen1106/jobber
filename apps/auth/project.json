@@ -6,32 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "dependsOn": ["generate-types", "^build"]
-    },
-    "prune-lockfile": {
-      "dependsOn": ["build"],
-      "cache": true,
-      "executor": "@nx/js:prune-lockfile",
-      "outputs": [
-        "{workspaceRoot}/dist/apps/auth/package.json",
-        "{workspaceRoot}/dist/apps/auth/package-lock.json"
-      ],
-      "options": {
-        "buildTarget": "build"
-      }
-    },
-    "copy-workspace-modules": {
-      "dependsOn": ["build"],
-      "cache": true,
-      "outputs": ["{workspaceRoot}/dist/apps/auth/workspace_modules"],
-      "executor": "@nx/js:copy-workspace-modules",
-      "options": {
-        "buildTarget": "build"
-      }
-    },
-    "prune": {
-      "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
-      "executor": "nx:noop"
+      "dependsOn": ["generate-prisma", "generate-ts-proto"]
     },
     "serve": {
       "executor": "@nx/js:node",
@@ -51,9 +26,9 @@
       }
     },
     "test": {
-      "dependsOn": ["generate-types"]
+      "dependsOn": ["generate-prisma"]
     },
-    "generate-types": {
+    "generate-prisma": {
       "command": "prisma generate",
       "options": {
         "cwd": "{projectRoot}",
@@ -66,6 +41,9 @@
       "options": {
         "cwd": "{projectRoot}"
       }
+    },
+    "generate-ts-proto": {
+      "command": "nx generate-ts-proto"
     }
   }
 }

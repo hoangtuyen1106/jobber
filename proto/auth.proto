@@ -3,7 +3,7 @@ syntax = "proto3";
 package auth;
 
 service AuthService {
-    rpc Authenticate(AuthenticateRequest) return (User)
+    rpc Authenticate(AuthenticateRequest) returns (User);
 }
 
 message AuthenticateRequest {
@@ -11,6 +11,6 @@ message AuthenticateRequest {
 }
 
 message User {
-    init32 id = 1;
+    int32 id = 1;
     string email = 2;
 }
