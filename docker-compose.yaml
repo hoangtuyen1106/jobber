@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_PASSWORD: example
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql
 
   pulsar:
     image: apachepulsar/pulsar
