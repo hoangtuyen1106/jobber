@@ -28,7 +28,7 @@ export class JobsService implements OnModuleInit {
     return this.jobs.map((job) => job.meta);
   }
 
-  async executeJob(name: string) {
+  async executeJob(name: string, data: object) {
     const job = this.jobs.find((job) => job.meta.name === name);
     if (!job) {
       throw new BadRequestException(`Job ${name} does not exist.`);
@@ -39,7 +39,7 @@ export class JobsService implements OnModuleInit {
       );
     }
 
-    await job.discoveredClass.instance.execute({}, job.meta.name);
+    await job.discoveredClass.instance.execute(data, job.meta.name);
     return job.meta;
   }
 }
