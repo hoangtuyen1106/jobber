@@ -17,6 +17,10 @@
       }
     }
   },
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
   "private": true,
   "dependencies": {
     "@apollo/server": "^5.5.1",
