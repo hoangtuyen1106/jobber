@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { ClientGrpc } from '@nestjs/microservices';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import {
   AUTH_PACKAGE_NAME,
   AUTH_SERVICE_NAME,

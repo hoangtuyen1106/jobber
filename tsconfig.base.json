@@ -1,9 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,10 +10,13 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "baseUrl": ".",
     "paths": {
+      "@jobber/graphql": ["./libs/graphql/src/index.ts"],
+      "@jobber/pulsar": ["./libs/pulsar/src/index.ts"],
       "@jobber/nestjs": ["./libs/nestjs/src/index.ts"],
-      "types/proto/auth": ["./types/proto/auth.ts"],
-      "@jobber/pulsar": ["./libs/pulsar/src/index.ts"]
+      "@jobber/grpc": ["./libs/grpc/src/index.ts"],
+      "@jobber/prisma": ["./libs/prisma/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
