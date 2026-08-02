@@ -36,23 +36,5 @@
       }
     }
   ],
-  "analytics": false,
-  "targetDefaults": {
-    "build": {
-      "inputs": [
-        "{projectRoot}/**/*",
-        "{workspaceRoot}/libs/**/*",
-        "{workspaceRoot}/proto/*"
-      ],
-      "options": {
-        "assets": [
-          {
-            "glob": "*.proto",
-            "input": "proto",
-            "output": "proto"
-          }
-        ]
-      }
-    }
-  }
+  "analytics": false
 }

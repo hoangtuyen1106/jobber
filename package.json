@@ -4,18 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
-    "start": "nx run-many -t serve -p auth jobs executor",
-    "generate-ts-proto": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./types ./proto/*.proto --ts_proto_opt=nestJs=true"
-  },
-  "nx": {
-    "targets": {
-      "generate-ts-proto": {
-        "inputs": [
-          "{workspaceRoot}/proto/*.proto"
-        ],
-        "cache": true
-      }
-    }
+    "start": "nx run-many -t serve -p auth jobs executor"
   },
   "workspaces": [
     "apps/*",
@@ -37,8 +26,6 @@
     "@nestjs/microservices": "^11.1.28",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.0",
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
     "axios": "^1.6.0",
     "bcryptjs": "^3.0.3",
     "class-transformer": "^0.5.1",
@@ -86,7 +73,6 @@
     "lint-staged": "^16.4.0",
     "nx": "23.0.1",
     "prettier": "~3.6.2",
-    "prisma": "^7.8.0",
     "protoc": "^35.1.0",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
