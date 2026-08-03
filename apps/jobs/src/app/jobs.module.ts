@@ -3,7 +3,7 @@ import { PulsarModule } from '@jobber/pulsar';
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
-import { AUTH_PACKAGE_NAME } from 'types/proto/auth';
+import { AUTH_PACKAGE_NAME } from '@jobber/grpc';
 import { JobsResolver } from './jobs.resolver';
 import { JobsService } from './jobs.service';
 import { FibonacciJob } from './jobs/fibonacci/fibonacci.job';
