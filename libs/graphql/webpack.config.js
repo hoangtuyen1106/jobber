@@ -1,13 +1,11 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
+const { library } = require('webpack');
 
 module.exports = {
   output: {
     path: join(__dirname, '../../dist/libs/graphql'),
-    clean: true,
-    ...(process.env.NODE_ENV !== 'production' && {
-      devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-    }),
+    libraryTarget: 'commonjs2',
   },
   plugins: [
     new NxAppWebpackPlugin({
@@ -17,8 +15,6 @@ module.exports = {
       tsConfig: './tsconfig.lib.json',
       optimization: false,
       outputHashing: 'none',
-      generatePackageJson: true,
-      sourceMap: true,
     }),
   ],
 };

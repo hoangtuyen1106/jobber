@@ -4,10 +4,7 @@ const { join } = require('path');
 module.exports = {
   output: {
     path: join(__dirname, '../../dist/libs/prisma'),
-    clean: true,
-    ...(process.env.NODE_ENV !== 'production' && {
-      devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-    }),
+    libraryTarget: 'commonjs2',
   },
   plugins: [
     new NxAppWebpackPlugin({
@@ -17,8 +14,6 @@ module.exports = {
       tsConfig: './tsconfig.lib.json',
       optimization: false,
       outputHashing: 'none',
-      generatePackageJson: true,
-      sourceMap: true,
     }),
   ],
 };
