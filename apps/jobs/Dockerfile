@@ -2,12 +2,14 @@ FROM node:22-slim AS builder
 
 WORKDIR /workspace
 
+# Copy nescessary files for building the app
 COPY package*.json ./
 COPY nx.json ./
 COPY tsconfig*.json ./
 COPY jest.config.ts ./
 COPY jest.preset.js ./
 COPY eslint.config.mjs ./
+COPY webpack.*.config.js ./
 
 COPY apps/jobs ./apps/jobs
 COPY libs/graphql ./libs/graphql
@@ -15,6 +17,7 @@ COPY libs/grpc ./libs/grpc
 COPY libs/nestjs ./libs/nestjs
 COPY libs/pulsar ./libs/pulsar
 
+# Install dependencies
 RUN npm install
 
 RUN apt-get update && apt-get install -y protobuf-compiler
