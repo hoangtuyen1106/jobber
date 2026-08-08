@@ -55,28 +55,16 @@ jobs:
             "auth apps/auth/Dockerfile"
           )
 
-          declare -A PIDS
           for image in "${IMAGES[@]}"; do
             NAME=$(echo $image | cut -d' ' -f1)
             DOCKERFILE=$(echo $image | cut -d' ' -f2)
 
             {
-              echo "Starting build for $NAME..."
               docker build \
                 --tag 639852019248.dkr.ecr.us-east-2.amazonaws.com/jobber/$NAME:latest \
                 -f $DOCKERFILE \
                 . && docker push 639852019248.dkr.ecr.us-east-2.amazonaws.com/jobber/$NAME:latest
-              echo "Successfully pushed $NAME"
             } &
-            PIDS[$NAME]=$!
           done
 
-          FAILED=0
-          for NAME in "${!PIDS[@]}"; do
-            if ! wait ${PIDS[$NAME]}; then
-              echo "ERROR: Failed to build/push $NAME"
-              FAILED=1
-            fi
-          done
-
-          exit $FAILED
+          wait
