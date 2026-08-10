@@ -1,6 +1,9 @@
+# Builder Stage
 FROM node:22-slim AS builder
 
 WORKDIR /workspace
+
+RUN apt-get update && apt-get install -y openssl
 
 # Copy nescessary files for building the app
 COPY package*.json ./
@@ -30,6 +33,8 @@ RUN npx nx build auth
 
 # Runner Stage
 FROM node:22-slim AS runner
+
+RUN apt-get update && apt-get install -y openssl
 
 WORKDIR /app
 
