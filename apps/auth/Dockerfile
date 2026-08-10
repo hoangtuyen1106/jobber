@@ -26,9 +26,7 @@ RUN npm install
 RUN apt-get update && apt-get install -y protobuf-compiler
 
 # Generate Prisma client
-ENV DATABASE_URL="postgresql://user:password@localhost:5432/dummy"
 RUN cd apps/auth && npx prisma generate
-ENV DATABASE_URL=""
 
 # Build the app
 RUN npx nx build auth
