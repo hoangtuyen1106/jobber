@@ -22,7 +22,7 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              npx prisma migrate deploy --schema=./apps/auth/prisma/schema.prisma
+              npx prisma migrate deploy --schema=prisma/schema.prisma
           env:
             {{- include "common.env" . | nindent 12 }}
       containers:
@@ -36,16 +36,10 @@ spec:
             {{- include "common.env" . | nindent 12 }}
             - name: PORT
               value: "{{ .Values.auth.port.http }}"
-            {{- if .Values.auth.jwt.secure }}
-            - name: SECURE_COOKIE
-              value: "{{ .Values.auth.jwt.secure }}"
-            {{- end }}
             - name: JWT_SECRET
               value: {{ .Values.auth.jwt.secret }}
             - name: JWT_EXPIRATION_MS
               value: "{{ .Values.auth.jwt.expirationMs }}"
             - name: AUTH_GRPC_SERVICE_URL
               value: "0.0.0.0:{{ .Values.auth.port.grpc }}"
-            - name: DATABASE_URL
-              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/auth
 {{- end }}
