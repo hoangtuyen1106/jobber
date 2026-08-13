@@ -9,7 +9,7 @@ import { GqlLoggingPlugin } from '@jobber/graphql';
 @Module({
   imports: [
     LoggerModule,
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, expandVariables: true }),
     JobsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
