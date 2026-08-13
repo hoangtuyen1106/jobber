@@ -10,23 +10,20 @@ export abstract class AbstractJob<T extends object> {
 
   constructor(private readonly pulsarClient: PulsarClient) {}
 
-  async execute(data: T, job: string) {
-    await this.validateData(data);
+  async execute(data: T, name: string) {
     if (!this.producer) {
-      this.producer = await this.pulsarClient.createProducer(job);
+      this.producer = await this.pulsarClient.createProducer(name);
     }
     if (Array.isArray(data)) {
       for (const message of data) {
-        await this.send(message);
+        this.send({ ...message });
       }
-
-      return;
     }
-
-    await this.send(data);
+    await this.send({ ...data });
   }
 
   private async send(data: T) {
+    await this.validateData(data);
     await this.producer.send({ data: serialize(data) });
   }
 

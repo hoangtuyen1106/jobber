@@ -1,4 +1,6 @@
-const AUTH_API_URL = 'http://localhost:3000/graphql';
+console.log('Command line arguments:', process.argv);
+
+const AUTH_API_URL = process.argv[2] || 'http://localhost:3000/graphql';
 
 const LOGIN_MUTATION = `
     mutation Login($loginInput: LoginInput!) {
@@ -8,7 +10,7 @@ const LOGIN_MUTATION = `
     }
 `;
 
-const JOBS_API_URL = 'http://localhost:3001/graphql';
+const JOBS_API_URL = process.argv[3] || 'http://localhost:3001/graphql';
 
 const EXECUTE_JOB_MUTATION = `
     mutation ExecuteJob($executeJobInput: ExecuteJobInput!) {
@@ -19,7 +21,7 @@ const EXECUTE_JOB_MUTATION = `
 `;
 
 async function login(email, password) {
-  const reponse = await fetch(AUTH_API_URL, {
+  const response = await fetch(AUTH_API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -28,8 +30,8 @@ async function login(email, password) {
     }),
   });
 
-  const data = await reponse.json();
-  const cookies = reponse.headers.get('set-cookie');
+  const data = await response.json();
+  const cookies = response.headers.get('set-cookie');
   return { data, cookies };
 }
 
@@ -49,11 +51,11 @@ async function executeJobWithInput(executeJobInput, cookies) {
 
 (async () => {
   const { data: loginData, cookies } = await login(
-    'hoangtuyen1106@mail.com',
+    'hoangtuyen1106@gmail.com',
     'SomeTestPassword123!',
   );
   if (loginData?.data.login.id) {
-    const n = 1000;
+    const n = parseInt(process.argv[4], 10) || 1000;
     console.log(`Executing Fibonacci with n = ${n}`);
     const executeJobInput = {
       name: 'Fibonacci',
