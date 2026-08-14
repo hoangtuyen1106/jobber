@@ -16,10 +16,11 @@ export abstract class AbstractJob<T extends object> {
     }
     if (Array.isArray(data)) {
       for (const message of data) {
-        this.send({ ...message });
+        await this.send(message as T);
       }
+    } else {
+      await this.send(data);
     }
-    await this.send({ ...data });
   }
 
   private async send(data: T) {
