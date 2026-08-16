@@ -48,3 +48,6 @@ Thumbs.db
 
 restapi
 CLAUDE.md
+
+data/*
+apps/jobs/uploads/*
