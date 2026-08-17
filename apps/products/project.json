@@ -69,6 +69,18 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "generate-drizzle": {
+      "command": "drizzle-kit generate",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    },
+    "migrate-drizzle": {
+      "command": "drizzle-kit migrate",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
     }
   }
 }
