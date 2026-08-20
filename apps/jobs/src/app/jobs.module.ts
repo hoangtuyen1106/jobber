@@ -8,6 +8,7 @@ import { JobsResolver } from './jobs.resolver';
 import { PulsarModule } from '@jobber/pulsar';
 import { JobsService } from './jobs.service';
 import { FibonacciJob } from './jobs/fibonacci/fibonacci.job';
+import { LoadProductsJob } from './jobs/products/load-products.job';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { FibonacciJob } from './jobs/fibonacci/fibonacci.job';
       },
     ]),
   ],
-  providers: [FibonacciJob, JobsService, JobsResolver],
+  providers: [FibonacciJob, JobsService, JobsResolver, LoadProductsJob],
 })
 export class JobsModule {}
