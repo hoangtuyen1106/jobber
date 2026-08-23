@@ -4,6 +4,7 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import { DATABASE_CONNECTION } from "./database-connection";
 import * as productsSchema from "../products/schema";
+import * as categoriesSchema from "../categories/schema";
 
 @Global()
 @Module({
@@ -16,7 +17,8 @@ import * as productsSchema from "../products/schema";
                 })
                 return drizzle(pool, {
                     schema: {
-                        ...productsSchema
+                        ...productsSchema,
+                        ...categoriesSchema
                     }
                 });
             },
