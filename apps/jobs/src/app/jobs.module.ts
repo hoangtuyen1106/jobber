@@ -9,11 +9,13 @@ import { PulsarModule } from '@jobber/pulsar';
 import { JobsService } from './jobs.service';
 import { FibonacciJob } from './jobs/fibonacci/fibonacci.job';
 import { LoadProductsJob } from './jobs/products/load-products.job';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
     DiscoveryModule,
     PulsarModule,
+    PrismaModule,
     ClientsModule.registerAsync([
       {
         name: Packages.AUTH,
