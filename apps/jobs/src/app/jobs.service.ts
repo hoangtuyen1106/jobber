@@ -13,11 +13,16 @@ import { JobMetadata } from './interfaces/job-metadata.interface';
 import { AbstractJob } from './jobs/abstract.job';
 import { readFileSync } from 'fs';
 import { UPLOAD_FILE_PATH } from './uploads/upload';
+import { PrismaService } from './prisma/prisma.service';
+import { JobStatus } from './models/job-status.enum';
 
 @Injectable()
 export class JobsService implements OnModuleInit {
   private jobs: DiscoveredClassWithMeta<JobMetadata>[] = [];
-  constructor(private readonly discoveryService: DiscoveryService) {}
+  constructor(
+    private readonly discoveryService: DiscoveryService,
+    private readonly prismaService: PrismaService,
+  ) {}
 
   async onModuleInit() {
     this.jobs =
@@ -46,6 +51,36 @@ export class JobsService implements OnModuleInit {
       job.meta.name,
     );
     return job.meta;
+  }
+
+  async acknowledge(jobId: number) {
+    const job = await this.prismaService.job.findUnique({
+      where: {
+        id: jobId,
+      },
+    });
+
+    if (!job) {
+      throw new BadRequestException(`Job with ID ${jobId} does not exits.`);
+    }
+
+    if (job.ended) {
+      return;
+    }
+
+    const updateJob = await this.prismaService.job.update({
+      where: { id: jobId },
+      data: { completed: { increment: 1 } },
+    });
+
+    if (updateJob.completed === job.size) {
+      await this.prismaService.job.update({
+        where: { id: jobId },
+        data: { status: JobStatus.COMPLETED, ended: new Date() },
+      });
+    }
+
+    return updateJob;
   }
 
   private getFile(fileName?: string) {

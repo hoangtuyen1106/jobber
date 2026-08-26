@@ -10,6 +10,7 @@ import { JobsService } from './jobs.service';
 import { FibonacciJob } from './jobs/fibonacci/fibonacci.job';
 import { LoadProductsJob } from './jobs/products/load-products.job';
 import { PrismaModule } from './prisma/prisma.module';
+import { JobsController } from './jobs.controller';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PrismaModule } from './prisma/prisma.module';
       },
     ]),
   ],
+  controllers: [JobsController],
   providers: [FibonacciJob, JobsService, JobsResolver, LoadProductsJob],
 })
 export class JobsModule {}
