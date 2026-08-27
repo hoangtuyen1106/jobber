@@ -46,5 +46,9 @@ RUN npm ci
 # Copy build output
 COPY --from=builder /workspace/dist ./dist
 
+#copy entrypoint script
+COPY apps/products/docker-entrypoint.sh /app/docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
+
 # Run the application
-CMD ["node", "dist/apps/products/main"]
+ENTRYPOINT ["node", "app/docker-entrypoint.sh"]

@@ -5,8 +5,6 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: example
-    volumes:
-      - db_data:/var/lib/postgresql
 
   pulsar:
     image: apachepulsar/pulsar
@@ -14,6 +12,4 @@ services:
       /pulsar/bin/pulsar standalone
     ports:
       - 6650:6650
-
-volumes:
-  db_data:
+    restart: always

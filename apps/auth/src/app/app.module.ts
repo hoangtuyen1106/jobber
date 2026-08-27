@@ -16,6 +16,8 @@ import { GqlLoggingPlugin } from '@jobber/graphql';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       plugins: [new GqlLoggingPlugin()],
+      graphiql: true,
+      path: 'auth',
       playground: {
         settings: {
           'request.credentials': 'include',

@@ -60,5 +60,9 @@ COPY --from=builder /workspace/dist ./dist
 # Copy generated Prisma Client
 COPY --from=builder /workspace/apps/auth/src/generated ./apps/auth/src/generated
 
+#copy entrypoint script
+COPY apps/auth/docker-entrypoint.sh /app/docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
+
 # Run the application
-CMD ["node", "dist/apps/auth/main"]
+ENTRYPOINT ["node", "app/docker-entrypoint.sh"]
