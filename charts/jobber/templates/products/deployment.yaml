@@ -22,7 +22,7 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              cd apps/products && npx drizzle-kit migrate
+              npx drizzle-kit migrate
           env:
             {{- include "common.env" . | nindent 12 }}
             - name: DATABASE_URL

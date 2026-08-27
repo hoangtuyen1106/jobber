@@ -65,4 +65,4 @@ COPY apps/auth/docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
 
 # Run the application
-ENTRYPOINT ["node", "app/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

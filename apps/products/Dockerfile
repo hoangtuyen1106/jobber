@@ -33,8 +33,8 @@ WORKDIR /app
 COPY --from=builder /workspace/package.json ./
 COPY --from=builder /workspace/apps/products/package.json ./apps/products/package.json
 COPY --from=builder /workspace/libs/grpc/package.json ./libs/grpc/package.json
-COPY --from=builder /workspace/apps/products/drizzle.config.ts ./apps/products/drizzle.config.ts
-COPY --from=builder /workspace/apps/products/drizzle ./apps/products/drizzle
+COPY --from=builder /workspace/apps/products/drizzle.config.ts ./drizzle.config.ts
+COPY --from=builder /workspace/apps/products/drizzle ./drizzle
 COPY --from=builder /workspace/package-lock.json ./
 
 # Set production environment
@@ -51,4 +51,4 @@ COPY apps/products/docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
 
 # Run the application
-ENTRYPOINT ["node", "app/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
