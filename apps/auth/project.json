@@ -8,6 +8,9 @@
     "build": {
       "dependsOn": ["generate-prisma", "^build"]
     },
+    "test": {
+      "dependsOn": ["generate-prisma"]
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
@@ -24,9 +27,6 @@
           "buildTarget": "auth:build:production"
         }
       }
-    },
-    "test": {
-      "dependsOn": ["generate-prisma"]
     },
     "generate-prisma": {
       "command": "prisma generate",

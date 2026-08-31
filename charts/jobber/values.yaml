@@ -1,5 +1,5 @@
 global:
-  imagePullPolicy: Always
+  imagePullPolicy: Never
 
 ingress:
   alb: false
@@ -57,7 +57,7 @@ postgresql:
 jobs:
   enabled: true
   replicas: 1
-  image: '639852019248.dkr.ecr.us-east-2.amazonaws.com/jobber/jobs:latest'
+  image: 'jobber/jobs:latest'
   port:
     http: 3001
     grpc: 5002
@@ -65,13 +65,13 @@ jobs:
 executor:
   enabled: true
   replicas: 1
-  image: '639852019248.dkr.ecr.us-east-2.amazonaws.com/jobber/executor:latest'
+  image: 'jobber/executor:latest'
   port: 3002
 
 auth:
   enabled: true
   replicas: 1
-  image: '639852019248.dkr.ecr.us-east-2.amazonaws.com/jobber/auth:latest'
+  image: 'jobber/auth:latest'
   port:
     http: 3000
     grpc: 5000
@@ -82,7 +82,7 @@ auth:
 products:
   enabled: true
   replicas: 1
-  image: '639852019248.dkr.ecr.us-east-2.amazonaws.com/jobber/products:latest'
+  image: 'jobber/products:latest'
   port:
     http: 3003
     grpc: 5001
