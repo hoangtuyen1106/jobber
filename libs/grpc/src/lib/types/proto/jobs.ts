@@ -5,14 +5,15 @@
 // source: proto/jobs.proto
 
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
 export interface AcknowledgeRequest {
   jobId: number;
 }
 
-export interface AcknowledgeResponse {}
+export interface AcknowledgeResponse {
+}
 
 export interface JobsServiceClient {
   acknowledge(request: AcknowledgeRequest): Observable<AcknowledgeResponse>;
@@ -21,39 +22,22 @@ export interface JobsServiceClient {
 export interface JobsServiceController {
   acknowledge(
     request: AcknowledgeRequest,
-  ):
-    | Promise<AcknowledgeResponse>
-    | Observable<AcknowledgeResponse>
-    | AcknowledgeResponse;
+  ): Promise<AcknowledgeResponse> | Observable<AcknowledgeResponse> | AcknowledgeResponse;
 }
 
 export function JobsServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ['acknowledge'];
+    const grpcMethods: string[] = ["acknowledge"];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcMethod('JobsService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcMethod("JobsService", method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcStreamMethod('JobsService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcStreamMethod("JobsService", method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const JOBS_SERVICE_NAME = 'JobsService';
+export const JOBS_SERVICE_NAME = "JobsService";
